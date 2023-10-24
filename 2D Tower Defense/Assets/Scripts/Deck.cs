@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Deck : MonoBehaviour
 {
@@ -8,22 +10,36 @@ public class Deck : MonoBehaviour
     public int handSize;
     public int rewardSize;
 
-    public Hand hand;
+    [SerializeField] Hand handPrefab;
+    Hand _hand;
 
-    public void DrawCard(Transform parent, bool isReward)
+    void Start()
+    {
+        InitHand();
+    }
+
+    [ContextMenu("Draw a Card")]
+    public void DrawCard()
     {
         int index = Random.Range(0, cardDatas.Length);
-        Card newCard = Instantiate(cardPrefab, parent, false);
-        newCard.isReward = isReward;
+        Card newCard = Instantiate(cardPrefab, _hand.transform, false);
         newCard.data = cardDatas[index];
         newCard.RenderData();
 
-        hand.AddCard(newCard);
+        _hand.AddCard(newCard);
     }
 
+    [ContextMenu("Draw hand")]
     public void DrawHand()
     {
         for (int i = 0; i < handSize; i++)
-            DrawCard(hand.transform, false);
+            DrawCard();
+    }
+
+    void InitHand()
+    {
+        _hand = Instantiate(handPrefab, transform, false);
+        _hand.deck = this;
+        _hand.name = "Hand";
     }
 }

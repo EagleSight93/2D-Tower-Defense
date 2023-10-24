@@ -4,12 +4,12 @@ using UnityEngine.EventSystems;
 
 public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [HideInInspector] public bool isReward;
-
     [HideInInspector] public CardData data;
     [SerializeField] TMP_Text cost;
     [SerializeField] TMP_Text cardName;
     [SerializeField] TMP_Text description;
+
+    [HideInInspector] public bool isReward;
 
     public void RenderData()
     {
