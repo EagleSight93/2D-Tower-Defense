@@ -1,91 +1,29 @@
 using System.Collections;
-
 using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-
-    public CardData[] cardDataArray;
-    public GameObject cardPrefab;
-    public GameObject handGameObject;
-    public GameObject rewardGameObject;
+    public CardData[] cardDatas;
+    public Card cardPrefab;
     public int handSize;
     public int rewardSize;
 
-    // Start is called before the first frame update
-    void OnEnable()
+    public Hand hand;
+
+    public void DrawCard(Transform parent, bool isReward)
     {
-        //Subscribe to events
-        EventManager.onGameStart += DrawCard;
-        GameManager.startGame += DrawHand;
-        WaveManager.OnCompletedWave += DrawReward;
-    }
+        int index = Random.Range(0, cardDatas.Length);
+        Card newCard = Instantiate(cardPrefab, parent, false);
+        newCard.isReward = isReward;
+        newCard.data = cardDatas[index];
+        newCard.RenderData();
 
-    private void OnDisable()
-    {
-        //Subscribe to events
-        GameManager.drawCard -= DrawCard;
-        GameManager.startGame -= DrawHand;
-        WaveManager.OnCompletedWave -= DrawReward;
-    }
-
-    public void DrawCard()
-    {
-        //get select random CardData
-        int index = Random.Range(0, cardDataArray.Length);
-        //Instantiate prefab
-        GameObject newCard = Instantiate(cardPrefab, handGameObject.transform,false);
-        //Write data to card;
-        Card cardComponent = newCard.GetComponent<Card>();
-        cardComponent.Reward = false;
-        cardComponent.CardData = cardDataArray[index];
-        cardComponent.RenderData();
-
-    }
-
-    public void DrawcardReward()
-    {
-        //get select random CardData
-        int index = Random.Range(0, cardDataArray.Length);
-        //Instantiate prefab
-        GameObject newCard = Instantiate(cardPrefab, rewardGameObject.transform, false);
-        //Write data to card;
-        Card cardComponent = newCard.GetComponent<Card>();
-        cardComponent.Reward = true;
-        cardComponent.CardData = cardDataArray[index];
-        cardComponent.RenderData();
-
+        hand.AddCard(newCard);
     }
 
     public void DrawHand()
     {
         for (int i = 0; i < handSize; i++)
-            DrawCard();
+            DrawCard(hand.transform, false);
     }
-
-    public void PayDraw()
-    {
-       if(GameManager.instance.gold >= 50 && handGameObject.transform.childCount < handSize)
-        {
-            DrawCard();
-            GameManager.instance.gold -= 50;
-            PlayerUI.instance.UpdateGold();
-        }
-        
-    }
-
-
-    public void DrawReward()
-    {
-        //destroy last rewards
-        foreach(Transform reward in rewardGameObject.transform)
-        {
-            Destroy(reward.gameObject);
-        }
-        //draw more rewards
-        for (int i = 0; i < rewardSize; i++)
-            DrawcardReward();
-    }
-
-
 }

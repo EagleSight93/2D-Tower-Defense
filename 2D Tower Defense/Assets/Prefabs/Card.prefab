@@ -32,7 +32,6 @@ RectTransform:
   m_Children:
   - {fileID: 3729864255651540824}
   - {fileID: 4618230826226645043}
-  - {fileID: 3699075288082921998}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -57,19 +56,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3153967598749443062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ed92ff206ed1342b3679981aa432f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d60b15bf83e75649a8dc8b39a771826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlight: {fileID: 7427694810817983410}
+  isReward: 0
+  data: {fileID: 0}
   cost: {fileID: 6481509502109945748}
   cardName: {fileID: 8920837416369625458}
   description: {fileID: 5989432657280802090}
-  cardAudioClip:
-  - {fileID: 8300000, guid: 4b8d6fd452c067d4696da63f67c7d664, type: 3}
-  - {fileID: 8300000, guid: 3be7cdc877f2c5f46bb1f3060acdf6ef, type: 3}
-  - {fileID: 8300000, guid: 0507b3e3a77571b438f88778b6b2d4dc, type: 3}
-  - {fileID: 8300000, guid: 18b9111a4c71e2e468d6ef08fe8840dd, type: 3}
-  - {fileID: 8300000, guid: faefe6330a42b1e439944cebecec77cf, type: 3}
 --- !u!1 &5397041832131600432
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +76,7 @@ GameObject:
   - component: {fileID: 3070548942734410685}
   - component: {fileID: 5989432657280802090}
   m_Layer: 5
-  m_Name: Description
+  m_Name: descriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,7 +210,7 @@ GameObject:
   - component: {fileID: 5380152939390988295}
   - component: {fileID: 3441460664429202710}
   m_Layer: 5
-  m_Name: Art
+  m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,7 +288,7 @@ GameObject:
   - component: {fileID: 6949757807875732835}
   - component: {fileID: 6481509502109945748}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: costText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,81 +410,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &7427694810817983410
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3699075288082921998}
-  - component: {fileID: 8864069295025299518}
-  - component: {fileID: 5164983162320989667}
-  m_Layer: 5
-  m_Name: Highlight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &3699075288082921998
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7427694810817983410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2027629197147185835}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8864069295025299518
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7427694810817983410}
-  m_CullTransparentMesh: 1
---- !u!114 &5164983162320989667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7427694810817983410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.40375137, g: 0.1509434, b: 0.6037736, a: 0.7372549}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8839368106963615981
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +497,7 @@ GameObject:
   - component: {fileID: 5636137270042674438}
   - component: {fileID: 8918906423102946098}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: CostBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,7 +573,7 @@ GameObject:
   - component: {fileID: 4340458047803141012}
   - component: {fileID: 8920837416369625458}
   m_Layer: 5
-  m_Name: name
+  m_Name: nameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
