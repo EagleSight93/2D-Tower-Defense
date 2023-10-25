@@ -11,11 +11,11 @@ public class Hand : MonoBehaviour
 
     void OnEnable()
     {
-        CardEvents.OnCardClicked += PlayCard;
+        CardEvents.OnCardClicked += SelectCard;
     }
     void OnDisable()
     {
-        CardEvents.OnCardClicked -= PlayCard;
+        CardEvents.OnCardClicked -= SelectCard;
     }
 
     public void AddCard(Card card)
@@ -31,7 +31,12 @@ public class Hand : MonoBehaviour
         Destroy(card.gameObject);
     }
 
-    public void PlayCard(Card card)
+    public void SelectCard(Card card)
+    {
+       selectedCard = card;
+    }
+
+    public void UseCard(Card card)
     {
         // some other stuff
         RemoveCard(card);
