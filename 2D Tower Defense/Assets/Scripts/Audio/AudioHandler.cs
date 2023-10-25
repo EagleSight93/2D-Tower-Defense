@@ -8,7 +8,6 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioSource musicSource;
 
-
     [Header("Sound Clips")]
     [SerializeField] SoundClip cardClicked;
     [SerializeField] SoundClip cardHovered;

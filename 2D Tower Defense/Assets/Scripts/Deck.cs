@@ -10,13 +10,7 @@ public class Deck : MonoBehaviour
     public int handSize;
     public int rewardSize;
 
-    [SerializeField] Hand handPrefab;
-    Hand _hand;
-
-    private void Awake()
-    {
-        InitHand();
-    }
+    [SerializeField] Hand hand;
 
     void Start()
     {
@@ -27,11 +21,11 @@ public class Deck : MonoBehaviour
     public void DrawCard()
     {
         int index = Random.Range(0, cardDatas.Length);
-        Card newCard = Instantiate(cardPrefab, _hand.transform, false);
+        Card newCard = Instantiate(cardPrefab, hand.transform, false);
         newCard.data = cardDatas[index];
         newCard.RenderData();
 
-        _hand.AddCard(newCard);
+        hand.AddCard(newCard);
     }
 
     [ContextMenu("Draw hand")]
@@ -39,12 +33,5 @@ public class Deck : MonoBehaviour
     {
         for (int i = 0; i < handSize; i++)
             DrawCard();
-    }
-
-    void InitHand()
-    {
-        _hand = Instantiate(handPrefab, transform, false);
-        _hand.deck = this;
-        _hand.name = "Hand";
     }
 }
