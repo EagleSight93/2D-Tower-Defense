@@ -13,7 +13,13 @@ public class BezierPath : MonoBehaviour
 
     [SerializeField] GameObject pointPrefab;
 
-    List<Vector3> _points = new();
+    readonly List<Vector3> _points = new();
+    LineRenderer _lr;
+
+    private void Awake()
+    {
+        _lr = GetComponent<LineRenderer>();
+    }
 
     void Start()
     {
@@ -37,6 +43,9 @@ public class BezierPath : MonoBehaviour
             {
                 startControl = RandomPosInRadius(start, minControlDist, maxControlDist);
                 CreateBezier(start, target, startControl, startControl, resolution);
+
+                _lr.positionCount = _points.Count;
+                _lr.SetPositions(_points.ToArray());
                 return;
             }
 
@@ -62,12 +71,12 @@ public class BezierPath : MonoBehaviour
         controlsContainer.SetParent(curveContainer);
         pointsContainer.SetParent(curveContainer);
 
-        CreateControlPoints(startControl, endControl, controlsContainer);
+        //CreateControlPoints(startControl, endControl, controlsContainer);
 
         List<Vector3> bezier = BezierCurve.CreatePath(start, end, startControl, endControl, numPoints);
         foreach (Vector3 point in bezier)
         {
-            Instantiate(pointPrefab, point, Quaternion.identity, pointsContainer);
+            //Instantiate(pointPrefab, point, Quaternion.identity, pointsContainer);
         }
 
         _points.AddRange(bezier);

@@ -27,6 +27,7 @@ public class BezierCurve
         {
             float lerp = (float)i / numPoints;
             Vector2 pos = GetPointOnBezier(start, end, startControl, endControl, lerp);
+
             curPoints.Add(pos);
         }
         return curPoints;
