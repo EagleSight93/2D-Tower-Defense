@@ -13,9 +13,14 @@ public class Deck : MonoBehaviour
     [SerializeField] Hand handPrefab;
     Hand _hand;
 
-    void Start()
+    private void Awake()
     {
         InitHand();
+    }
+
+    void Start()
+    {
+        DrawHand();
     }
 
     [ContextMenu("Draw a Card")]
