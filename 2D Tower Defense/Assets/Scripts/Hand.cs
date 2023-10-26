@@ -18,6 +18,12 @@ public class Hand : MonoBehaviour
         CardEvents.OnCardClicked -= SelectCard;
     }
 
+    private void Update()
+    {
+        
+    }
+
+
     public void AddCard(Card card)
     {
         cards.Add(card);
