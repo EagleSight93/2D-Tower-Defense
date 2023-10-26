@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -21,12 +22,7 @@ public class BezierPath : MonoBehaviour
         _lr = GetComponent<LineRenderer>();
     }
 
-    void Start()
-    {
-        CreatePathToTarget(MainCamera.Instance.RandomBoundsRadiusPos, Vector3.zero);
-    }
-
-    void CreatePathToTarget(Vector3 start, Vector3 target)
+    public void CreatePathToTarget(Vector3 start, Vector3 target)
     {
         int iterations = 0;
         while (start != target)
@@ -64,31 +60,8 @@ public class BezierPath : MonoBehaviour
 
     Vector3 CreateBezier(Vector3 start, Vector3 end, Vector3 startControl, Vector3 endControl, int numPoints)
     {
-        Transform curveContainer = new GameObject("BezierCurve").transform;
-        Transform controlsContainer = new GameObject("Controls").transform;
-        Transform pointsContainer = new GameObject("Points").transform;
-
-        curveContainer.SetParent(transform);
-        controlsContainer.SetParent(curveContainer);
-        pointsContainer.SetParent(curveContainer);
-
-        //CreateControlPoints(startControl, endControl, controlsContainer);
-
         List<Vector3> bezier = BezierCurve.CreatePath(start, end, startControl, endControl, numPoints);
-        foreach (Vector3 point in bezier)
-        {
-            //Instantiate(pointPrefab, point, Quaternion.identity, pointsContainer);
-        }
-
         _points.AddRange(bezier);
         return bezier[^1];
-    }
-
-    void CreateControlPoints(Vector3 startControl, Vector3 endControl, Transform parent)
-    {
-        GameObject start = Instantiate(pointPrefab, startControl, Quaternion.identity, parent);
-        GameObject end = Instantiate(pointPrefab, endControl, Quaternion.identity, parent);
-        start.GetComponent<SpriteRenderer>().color = Color.green;
-        end.GetComponent<SpriteRenderer>().color = Color.red;
     }
 }

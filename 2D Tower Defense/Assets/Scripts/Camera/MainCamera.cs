@@ -7,7 +7,16 @@ public class MainCamera : MonoBehaviour
 {
     public static MainCamera Instance { get; private set; }
     public Camera Cam { get; private set; }
-    public Bounds CamBounds => _boundsCol.bounds;
+    public Bounds CamBounds
+    {
+        get
+        {
+            float height = Cam.orthographicSize * 2;
+            float width = height * Cam.aspect;
+            Vector2 size = new(width, height);
+            return new Bounds(transform.position, size);
+        }
+    }
     public Vector2 MousePos => Cam.ScreenToWorldPoint(Input.mousePosition);
     public Vector3 ClampedMousePos
     {
@@ -50,7 +59,6 @@ public class MainCamera : MonoBehaviour
             };
         }
     }
-    BoxCollider2D _boundsCol;
 
     private void Awake()
     {
@@ -65,6 +73,5 @@ public class MainCamera : MonoBehaviour
         }
 
         Cam = GetComponent<Camera>();
-        _boundsCol = GetComponent<BoxCollider2D>();
     }
 }
