@@ -6,14 +6,15 @@ public class EnemyPathsController : MonoBehaviour
 {
     readonly List<EnemyPath> currentPaths = new();
 
-    [Min(1)][SerializeField] int radiusPointsCount = 8;
-    [SerializeField] float radiusDistOffset = 1.5f;
+    [SerializeField] float worldSize = 1000;
+
+    [Min(1)][SerializeField] int pathsCount = 8;
     [SerializeField] BezierPath pathPrefab;
     [SerializeField] EnemyPath enemyPathPrefab;
 
     private void Start()
     {
-        Vector3[] points = GetPointsAroundCenter(MainCamera.Instance.CamBounds.max.x + radiusDistOffset, radiusPointsCount);
+        Vector3[] points = GetPointsAroundCenter(worldSize, pathsCount);
         foreach (var point in points)
         {
             EnemyPath enemyPath = Instantiate(enemyPathPrefab, transform, false);
@@ -33,7 +34,6 @@ public class EnemyPathsController : MonoBehaviour
         {
             angle += angleDiff;
             Vector3 newPos = (Quaternion.Euler(0, 0, angle) * Vector3.right) * radius;
-            newPos = MainCamera.Instance.CamBounds.ClosestPoint(newPos);
             points[i] = newPos;
         }
         return points;

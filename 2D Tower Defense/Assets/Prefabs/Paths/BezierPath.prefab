@@ -47,9 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolution: 100
   minControlDist: 0
-  maxControlDist: 1
-  distToNextPath: 1
-  pointPrefab: {fileID: 1699173446446107320, guid: 4e8d8fe6920e56a4280d41bff968081e, type: 3}
+  maxControlDist: 50
+  distToNextPath: 25
 --- !u!120 &8737522447504391491
 LineRenderer:
   serializedVersion: 2
@@ -97,7 +96,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.04
+    widthMultiplier: 2
     widthCurve:
       serializedVersion: 2
       m_Curve:

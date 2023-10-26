@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Application.isFocused) return;
+
         //Zoom
         Camera.main.orthographicSize = Mathf.Clamp(-Input.mouseScrollDelta.y + Camera.main.orthographicSize, minZoom, maxZoom);
         
@@ -57,9 +59,5 @@ public class CameraController : MonoBehaviour
             Vector3 mouseDir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f)).normalized;
             transform.position += mouseDir * (maxPanSpeed * maxDelta) * Time.deltaTime * Camera.main.orthographicSize;
         }
-
-     
-
-
     }
 }

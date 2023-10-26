@@ -26,15 +26,15 @@ public class BezierPath : MonoBehaviour
         while (start != target)
         {
             iterations++;
-            if (iterations >= 100)
+            if (iterations >= 1000)
             {
                 Debug.LogError("Infinite loop");
-                break;
+                return;
             }
 
             Vector3 end = start + (target - start).normalized * distToNextPath;
             Vector3 startControl;
-            if (Vector3.Distance(start, target) <= 2f)
+            if (Vector3.Distance(start, target) <= 50)
             {
                 startControl = RandomPosInRadius(start, minControlDist, maxControlDist);
                 CreateBezier(start, target, startControl, startControl, resolution);

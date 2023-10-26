@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a460e273bc684a45baeff18f54e9d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusPointsCount: 9
-  radiusDistOffset: 1.5
+  worldSize: 500
+  pathsCount: 8
   pathPrefab: {fileID: 3894666063433660103, guid: fc1073ca2bb673044bb1489261acaeea, type: 3}
   enemyPathPrefab: {fileID: 6081637414899548806, guid: a69e658675d1f3a468b468e3ce398fe9, type: 3}
