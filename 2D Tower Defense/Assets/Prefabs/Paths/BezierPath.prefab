@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: 100
-  minControlDist: 1
+  minControlDist: 0
   maxControlDist: 1
   distToNextPath: 1
   pointPrefab: {fileID: 1699173446446107320, guid: 4e8d8fe6920e56a4280d41bff968081e, type: 3}
