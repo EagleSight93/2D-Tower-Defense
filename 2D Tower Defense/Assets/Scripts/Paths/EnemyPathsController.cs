@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathsCreator : MonoBehaviour
+public class EnemyPathsController : MonoBehaviour
 {
+    readonly List<EnemyPath> currentPaths = new();
+
     [Min(1)][SerializeField] int radiusPointsCount = 8;
     [SerializeField] float radiusDistOffset = 1.5f;
     [SerializeField] BezierPath pathPrefab;
+    [SerializeField] EnemyPath enemyPathPrefab;
 
     private void Start()
     {
         Vector3[] points = GetPointsAroundCenter(MainCamera.Instance.CamBounds.max.x + radiusDistOffset, radiusPointsCount);
         foreach (var point in points)
         {
-            BezierPath path = Instantiate(pathPrefab, transform, false);
+            EnemyPath enemyPath = Instantiate(enemyPathPrefab, transform, false);
+            BezierPath path = Instantiate(pathPrefab, enemyPath.transform, false);
+            enemyPath.path = path;
             path.CreatePathToTarget(point, Vector3.zero);
+            currentPaths.Add(enemyPath);
         }
     }
 
@@ -31,5 +37,10 @@ public class PathsCreator : MonoBehaviour
             points[i] = newPos;
         }
         return points;
+    }
+
+    public EnemyPath GetPath(int index)
+    {
+        return currentPaths[index];
     }
 }

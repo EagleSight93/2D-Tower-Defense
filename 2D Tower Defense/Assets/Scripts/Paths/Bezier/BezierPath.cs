@@ -12,9 +12,7 @@ public class BezierPath : MonoBehaviour
     [SerializeField] float maxControlDist = 4f;
     [SerializeField] float distToNextPath = 3f;
 
-    [SerializeField] GameObject pointPrefab;
-
-    readonly List<Vector3> _points = new();
+    public List<Vector3> Points { get; } = new();
     LineRenderer _lr;
 
     private void Awake()
@@ -41,8 +39,8 @@ public class BezierPath : MonoBehaviour
                 startControl = RandomPosInRadius(start, minControlDist, maxControlDist);
                 CreateBezier(start, target, startControl, startControl, resolution);
 
-                _lr.positionCount = _points.Count;
-                _lr.SetPositions(_points.ToArray());
+                _lr.positionCount = Points.Count;
+                _lr.SetPositions(Points.ToArray());
                 return;
             }
 
@@ -61,7 +59,7 @@ public class BezierPath : MonoBehaviour
     Vector3 CreateBezier(Vector3 start, Vector3 end, Vector3 startControl, Vector3 endControl, int numPoints)
     {
         List<Vector3> bezier = BezierCurve.CreatePath(start, end, startControl, endControl, numPoints);
-        _points.AddRange(bezier);
+        Points.AddRange(bezier);
         return bezier[^1];
     }
 }
