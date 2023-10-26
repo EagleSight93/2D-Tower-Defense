@@ -23,10 +23,11 @@ public class BezierPath : MonoBehaviour
 
     void Start()
     {
-        Vector3 target = Vector3.zero;
-        Vector3 start = MainCamera.Instance.RandomBoundsRadiusPos;
-        Vector3 startControl = RandomPosInRadius(start, minControlDist, maxControlDist);
+        CreatePathToTarget(MainCamera.Instance.RandomBoundsRadiusPos, Vector3.zero);
+    }
 
+    void CreatePathToTarget(Vector3 start, Vector3 target)
+    {
         int iterations = 0;
         while (start != target)
         {
@@ -38,7 +39,7 @@ public class BezierPath : MonoBehaviour
             }
 
             Vector3 end = start + (target - start).normalized * distToNextPath;
-
+            Vector3 startControl;
             if (Vector3.Distance(start, target) <= 2f)
             {
                 startControl = RandomPosInRadius(start, minControlDist, maxControlDist);
