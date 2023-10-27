@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BezierPath : MonoBehaviour
+public class WaypointPath : MonoBehaviour
 {
     [SerializeField] int resolution = 100;
     [SerializeField] float minControlDist = 0f;

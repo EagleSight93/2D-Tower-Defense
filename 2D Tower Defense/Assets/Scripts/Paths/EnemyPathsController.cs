@@ -9,7 +9,7 @@ public class EnemyPathsController : MonoBehaviour
     [SerializeField] float worldSize = 1000;
 
     [Min(1)][SerializeField] int pathsCount = 8;
-    [SerializeField] BezierPath pathPrefab;
+    [SerializeField] WaypointPath pathPrefab;
     [SerializeField] EnemyPath enemyPathPrefab;
 
     private void Start()
@@ -18,7 +18,7 @@ public class EnemyPathsController : MonoBehaviour
         foreach (var point in points)
         {
             EnemyPath enemyPath = Instantiate(enemyPathPrefab, transform, false);
-            BezierPath path = Instantiate(pathPrefab, enemyPath.transform, false);
+            WaypointPath path = Instantiate(pathPrefab, enemyPath.transform, false);
             enemyPath.path = path;
             path.CreatePathToTarget(point, Vector3.zero);
             currentPaths.Add(enemyPath);

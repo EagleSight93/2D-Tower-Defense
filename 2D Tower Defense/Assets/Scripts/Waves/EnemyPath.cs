@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class EnemyPath : MonoBehaviour
 {
-    [HideInInspector] public BezierPath path;
-    EnemyWaveManager _waveManager;
-
-    private void Awake()
-    {
-        _waveManager = FindObjectOfType<EnemyWaveManager>();
-    }
+    [HideInInspector] public WaypointPath path;
+    public List<EnemyGroupSO> possibleGroups;
 
     private void Start()
     {
@@ -33,11 +28,11 @@ public class EnemyPath : MonoBehaviour
 
     IEnumerator SpawnGroupRoutine()
     {
-        int randIndex = Random.Range(0, _waveManager.possibleGroups.Count);
-        EnemyGroupSO enemyGroup = _waveManager.possibleGroups[randIndex];
+        int randIndex = Random.Range(0, possibleGroups.Count);
+        EnemyGroupSO enemyGroup = possibleGroups[randIndex];
         foreach (Enemy enemyPrefab in enemyGroup.enemies)
         {
-            Enemy enemy = Instantiate(enemyPrefab, path.Points[0], Quaternion.identity);
+            Enemy enemy = Instantiate(enemyPrefab, path.Points[0], Quaternion.identity, transform);
             enemy.pathfinding.Init(path.Points);
             yield return new WaitForSeconds(enemyGroup.spawnInterval);
         }

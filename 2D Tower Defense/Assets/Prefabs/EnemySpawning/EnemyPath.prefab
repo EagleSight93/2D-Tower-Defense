@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f934c85ad1b835142a78148d569e3c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveSpawnerPrefab: {fileID: 5258324354645843989, guid: 27a48f028ad28f5498c3beb1153ef9d2, type: 3}
+  path: {fileID: 0}
+  possibleGroups:
+  - {fileID: 11400000, guid: 2b5890779f6540b4fb8b41b1282f2993, type: 2}
