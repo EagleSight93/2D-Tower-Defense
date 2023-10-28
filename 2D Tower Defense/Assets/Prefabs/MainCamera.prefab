@@ -60,10 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3871babc18215b468649bc62a77b33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPanSpeed: 1
+  maxPanSpeed: 0.2
   verticalPanArea: 50
   horizontalPanArea: 50
-  minZoom: 5
+  minZoom: 1
   maxZoom: 250
 --- !u!20 &6786561817177361854
 Camera:
