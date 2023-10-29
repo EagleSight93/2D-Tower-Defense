@@ -49,15 +49,15 @@ public class CameraController : MonoBehaviour
         }
 
         //Pan
-        if (mouseHeightInArea != 0 || mouseWidthInArea!=0)
+        if (mouseHeightInArea != 0 || mouseWidthInArea != 0)
         {
-            float normalizedHeight = mouseHeightInArea / verticalPanArea;
-            float normalizedWidth = mouseWidthInArea / horizontalPanArea;
+            float heightPercentage = mouseHeightInArea / verticalPanArea;
+            float widthPercentage = mouseWidthInArea / horizontalPanArea;
 
-            float maxDelta = Mathf.Max(normalizedHeight, normalizedWidth);
+            float maxPercentage = Mathf.Max(heightPercentage, widthPercentage);
 
             Vector3 mouseDir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f)).normalized;
-            transform.position += mouseDir * (maxPanSpeed * maxDelta) * Time.deltaTime * Camera.main.orthographicSize;
+            transform.position += mouseDir * (maxPanSpeed * maxPercentage) * Time.deltaTime * Camera.main.orthographicSize;
         }
     }
 }

@@ -11,7 +11,7 @@ public class Deck : MonoBehaviour
     public int rewardSize;
 
     [SerializeField] Hand hand;
-
+    
     void Start()
     {
         DrawHand();
