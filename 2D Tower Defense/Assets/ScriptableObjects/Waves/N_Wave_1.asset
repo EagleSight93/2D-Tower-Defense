@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216bd2e901a9b9b40b2ee819f08a46b5, type: 3}
   m_Name: N_Wave_1
   m_EditorClassIdentifier: 
+  duration: 30
   enemyGroups:
-  - spawnTimeAfterWaveStarted: 0
+  - waveSpawnTime: 0
     enemies:
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
     spawnInterval: 0.25
-  - spawnTimeAfterWaveStarted: 5
+  - waveSpawnTime: 5
     enemies:
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
@@ -27,7 +28,7 @@ MonoBehaviour:
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
     spawnInterval: 0.5
-  - spawnTimeAfterWaveStarted: 10
+  - waveSpawnTime: 10
     enemies:
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}
     - {fileID: 4964597384519497474, guid: e04bbb8a75ecb844eaa8b2f52638c4ad, type: 3}

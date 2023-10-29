@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Min(1)] [SerializeField] int startWave = 1;
     [SerializeField] List<EnemyWave> waves;
 
     void OnEnable()
@@ -18,9 +19,10 @@ public class EnemySpawner : MonoBehaviour
 
     void StartWave(int waveNumber)
     {
-        if (waveNumber >= waves.Count) return;
+        int waveIndex = waveNumber - startWave+1;
+        if (waveIndex < 0 || waveIndex >= waves.Count) return;
 
-        StartCoroutine(SpawnWave(waves[waveNumber]));
+        StartCoroutine(SpawnWave(waves[waveIndex]));
     }
 
     IEnumerator SpawnWave(EnemyWave wave)
