@@ -12,6 +12,12 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     [HideInInspector] public bool isReward;
 
+    public Vector3 targetPos;
+    public Vector3 targetRotation;
+
+    public bool isMoving = false;
+    public bool isRotating = false;
+
     public void RenderData()
     {
         cost.text = data.cost.ToString();
