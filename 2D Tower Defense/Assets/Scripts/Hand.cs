@@ -147,7 +147,7 @@ public class Hand : MonoBehaviour
 
     IEnumerator RotateCard(Card card, float animationTime)
     {
-        float time = 0;
+        //float time = 0;
 
         yield return null;
     }

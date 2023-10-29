@@ -10,14 +10,14 @@ public class EnemySpawner : MonoBehaviour
 
     void OnEnable()
     {
-        GameEvents.OnWaveStarted += StartWave;
+        GameEvents.OnWaveNumberStarted += StartWaveNumber;
     }
     void OnDisable()
     {
-        GameEvents.OnWaveStarted -= StartWave;
+        GameEvents.OnWaveNumberStarted -= StartWaveNumber;
     }
 
-    void StartWave(int waveNumber)
+    void StartWaveNumber(int waveNumber)
     {
         int waveIndex = waveNumber - startWave+1;
         if (waveIndex < 0 || waveIndex >= waves.Count) return;

@@ -15,7 +15,8 @@ public class WaveController : MonoBehaviour
     [ContextMenu("Start All Waves")]
     void StartAllWaves()
     {
-        GameEvents.WaveStarted(currentWave);
+        GameEvents.WaveStarted();
+        GameEvents.WaveNumberStarted(currentWave);
         currentWave++;
     }
 }
