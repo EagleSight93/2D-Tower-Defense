@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5237360834456092356}
   - component: {fileID: 4964597384519497474}
-  - component: {fileID: 7064569278698741827}
   - component: {fileID: 7724122260088975876}
   - component: {fileID: -117455868703857818}
   m_Layer: 0
@@ -47,21 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c4166ae35c55a4baad6155bbaed717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathfinding: {fileID: 7064569278698741827}
---- !u!114 &7064569278698741827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7495157590939655594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11bea4ec9e497a94a820f19da8e19884, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
-  waypointDistThreshold: 1
+  pathfinding: {fileID: 0}
 --- !u!50 &7724122260088975876
 Rigidbody2D:
   serializedVersion: 4
