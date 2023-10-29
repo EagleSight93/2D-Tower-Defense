@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 508aa8372ced0c845b6d3f019321890f, type: 2}
   - {fileID: 11400000, guid: 6573539511ea4404b8587ecb26112296, type: 2}
   cardPrefab: {fileID: 7347247434220712067, guid: cbca06b4142af1441b4d516260068e78, type: 3}
-  handSize: 5
+  handSize: 8
   rewardSize: 0
   hand: {fileID: 686345509011852114}
 --- !u!223 &3040846053539207906
