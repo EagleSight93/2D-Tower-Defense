@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5237360834456092356}
   - component: {fileID: 4964597384519497474}
   - component: {fileID: -5436888072470335062}
+  - component: {fileID: 6136524094320172373}
   - component: {fileID: 7724122260088975876}
   - component: {fileID: 876271038473802020}
   - component: {fileID: -117455868703857818}
@@ -55,13 +56,35 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7495157590939655594}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddf3149b49233a445a4f67a6828cdae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 250
   drag: 1
+--- !u!195 &6136524094320172373
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495157590939655594}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 20
+  m_Speed: 30
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 1
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 0
 --- !u!50 &7724122260088975876
 Rigidbody2D:
   serializedVersion: 4
