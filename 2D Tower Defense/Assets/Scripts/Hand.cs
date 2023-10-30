@@ -1,6 +1,8 @@
+using SpleenTween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
@@ -39,14 +41,24 @@ public class Hand : MonoBehaviour
             }
         }
     }
-
+    void RotateCards()
+    {
+        foreach (Card card in cards)
+        {
+            if (card.transform.localRotation != card.targetRotation && !card.isRotating)
+            {
+                card.isRotating = true;
+                StartCoroutine(RotateCard(card, animationTime));
+            }
+        }
+    }
 
     void CalculatePositions()
     {
         if (cards.Count == 1)
         {
             cards[0].targetPos = Vector3.zero;
-            cards[0].targetRotation = Vector3.zero;
+            cards[0].targetRotation = Quaternion.identity;
             return;
         }
 
@@ -57,12 +69,14 @@ public class Hand : MonoBehaviour
 
         foreach (Card card in cards)
         {
-            card.targetPos = new Vector3 ( increment + cardwidth/2,0,0);
+            float xVal = increment + cardwidth/2;
+            float yVal = -Mathf.Abs(xVal)/7.5f; 
+            card.targetPos = new Vector3 (xVal, yVal, 0);
 
             increment += cardwidth;
 
-            float angle = (card.targetPos.x - transform.position.x) * rotationAngleMult * Mathf.Sign(card.targetPos.x);
-            card.transform.eulerAngles = new Vector3 (0,0,angle);
+            float angle = -rotationAngleMult * card.targetPos.x /1000;
+            card.targetRotation = Quaternion.Euler(0,0, angle);
 
         }
 
@@ -101,6 +115,7 @@ public class Hand : MonoBehaviour
         cards.Add(card);
         CalculatePositions();
         MoveCards();
+        RotateCards();
     }
 
     public void RemoveCard(Card card)
@@ -126,7 +141,6 @@ public class Hand : MonoBehaviour
 
     IEnumerator MoveCard(Card card,float animationTime)
     {
-        print("Started Coroutine");
         
         float time = 0;
         Vector3 startPos = card.transform.localPosition;
@@ -136,7 +150,6 @@ public class Hand : MonoBehaviour
             Vector3 lerpPos = Vector3.Lerp(startPos, card.targetPos, movingCardCurve.Evaluate(time));
             card.transform.localPosition = lerpPos;
             time += Time.deltaTime;
-            print("animating");
             yield return null;
         }
 
@@ -147,8 +160,17 @@ public class Hand : MonoBehaviour
 
     IEnumerator RotateCard(Card card, float animationTime)
     {
-        //float time = 0;
+        float time = 0;
+        Quaternion startRot = card.transform.localRotation;
 
-        yield return null;
+        while (time <= animationTime)
+        {
+            Vector3 lerpRot = Vector3.Lerp(startRot.eulerAngles, card.targetRotation.eulerAngles, rotatingCardCurve.Evaluate(time));
+            card.transform.localRotation = Quaternion.Euler(lerpRot.x, lerpRot.y, lerpRot.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        card.isRotating=false;
     }
 }

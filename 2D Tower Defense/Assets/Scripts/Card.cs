@@ -13,7 +13,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [HideInInspector] public bool isReward;
 
     public Vector3 targetPos;
-    public Vector3 targetRotation;
+    public Quaternion targetRotation;
 
     public bool isMoving = false;
     public bool isRotating = false;
@@ -33,6 +33,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
+        targetPos =  transform.localPosition + transform.up * 2;
         CardEvents.HoveredCard(this);
     }
 
