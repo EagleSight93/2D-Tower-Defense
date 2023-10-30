@@ -50,10 +50,10 @@ MonoBehaviour:
   musicSource: {fileID: 2019149259539391343}
   cardClicked:
     clip: {fileID: 8300000, guid: 0507b3e3a77571b438f88778b6b2d4dc, type: 3}
-    volume: 0.1
+    volume: 0.5
   cardHovered:
     clip: {fileID: 8300000, guid: 3be7cdc877f2c5f46bb1f3060acdf6ef, type: 3}
-    volume: 0.1
+    volume: 0.5
 --- !u!1 &4763151145246925254
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +100,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -225,7 +225,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

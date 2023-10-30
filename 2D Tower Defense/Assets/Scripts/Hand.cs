@@ -27,31 +27,31 @@ public class Hand : MonoBehaviour
     void OnEnable()
     {
         CardEvents.OnCardClicked += SelectCard;
-        CardEvents.OnCardEnter += (card) => MoveCard(card, animationTimeRaise);
-        CardEvents.OnCardExited += (card) => MoveCardInmediate(card, animationTimeRaise);
+        CardEvents.OnCardEntered += MoveCard;
+        CardEvents.OnCardExited += MoveCardImmediate;
     }
     void OnDisable()
     {
         CardEvents.OnCardClicked -= SelectCard;
-        CardEvents.OnCardEnter -= (card) => MoveCard(card, animationTimeRaise);
-        CardEvents.OnCardExited -= (card) => MoveCardInmediate(card, animationTimeRaise);
+        CardEvents.OnCardEntered -= MoveCard;
+        CardEvents.OnCardExited -= MoveCardImmediate;
     }
 
-    void MoveCard(Card card ,float animationTime)
+    void MoveCard(Card card)
     {
         if (card.transform.localPosition != card.targetPos && !card.isMoving)
         {
             card.isMoving = true;
-            card.runningCorotuine = StartCoroutine(AnimateCardMove(card, animationTime));
+            card.runningCorotuine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
         }
     }
-    void MoveCardInmediate(Card card, float animationTime)
+    void MoveCardImmediate(Card card)
     {
         if (card.transform.localPosition != card.targetPos)
         {
             card.isMoving = true;
             StopCoroutine(card.runningCorotuine);
-            card.runningCorotuine = StartCoroutine(AnimateCardMove(card, animationTime));
+            card.runningCorotuine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
         }
     }
 
@@ -132,7 +132,7 @@ public class Hand : MonoBehaviour
         CalculatePositions();
         foreach (Card card in cards)
         {
-            MoveCard(card,animationTimeMove);
+            MoveCard(card);
         }  
         //RotateCards();
     }

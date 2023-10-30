@@ -42,7 +42,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             targetPos = transform.localPosition + (Vector3.up * 100);
         }
         
-        CardEvents.EnterCard(this);
+        CardEvents.EnteredCard(this);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

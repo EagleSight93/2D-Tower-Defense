@@ -15,16 +15,16 @@ public class AudioHandler : MonoBehaviour
     void OnEnable()
     {
         CardEvents.OnCardClicked += CardClickedSound;
-        CardEvents.OnCardHovered += CardHovererdSound;
+        CardEvents.OnCardEntered += CardHovererdSound;
     }
     void OnDisable()
     {
         CardEvents.OnCardClicked -= CardClickedSound;
-        CardEvents.OnCardHovered -= CardHovererdSound;
+        CardEvents.OnCardEntered -= CardHovererdSound;
     }
 
-    void PlaySFX(SoundClip sfx) => sfxSource.PlayOneShot(sfx.Clip, sfx.Volume);
+    void PlaySoundEffect(SoundClip sfx) => sfxSource.PlayOneShot(sfx.Clip, sfx.Volume);
 
-    void CardClickedSound(Card _) => PlaySFX(cardClicked);
-    void CardHovererdSound(Card _) => PlaySFX(cardHovered);
+    void CardClickedSound(Card _) => PlaySoundEffect(cardClicked);
+    void CardHovererdSound(Card _) => PlaySoundEffect(cardHovered);
 }
