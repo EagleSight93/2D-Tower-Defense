@@ -33,12 +33,13 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        targetPos =  transform.localPosition + transform.up * 2;
-        CardEvents.HoveredCard(this);
+        targetPos =  transform.localPosition + transform.up * 100;
+        CardEvents.EnterCard(this);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
+        targetPos =  transform.localPosition + transform.up * -100;
         CardEvents.ExitedCard(this);
     }
 }

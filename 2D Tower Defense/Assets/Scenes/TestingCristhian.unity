@@ -253,6 +253,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 705167979446355856, guid: 01f16dbff25fefa4e9b9d25a5f8418b5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1599528305441952911, guid: 01f16dbff25fefa4e9b9d25a5f8418b5, type: 3}
       propertyPath: m_Name
       value: WaveController
