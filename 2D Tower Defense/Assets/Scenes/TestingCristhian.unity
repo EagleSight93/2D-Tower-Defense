@@ -253,6 +253,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 705167979446355856, guid: 01f16dbff25fefa4e9b9d25a5f8418b5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1599528305441952911, guid: 01f16dbff25fefa4e9b9d25a5f8418b5, type: 3}
       propertyPath: m_Name
       value: WaveController
@@ -497,8 +501,48 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: animationTimeMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: rotationAngleMult
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: animationTimeRaise
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: animationTimeRotate
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: rotatingCardCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: rotatingCardCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: movingCardCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: rotatingCardCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: movingCardCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: rotatingCardCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: rotatingCardCurve.m_Curve.Array.data[0].outSlope
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2617448854516361543, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: m_Pivot.x
@@ -586,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3407763131296537741, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: handSize
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3666851781021167560, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: m_Name

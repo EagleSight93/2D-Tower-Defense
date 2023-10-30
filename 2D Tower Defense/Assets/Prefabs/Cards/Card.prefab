@@ -64,6 +64,11 @@ MonoBehaviour:
   cardName: {fileID: 8920837416369625458}
   description: {fileID: 5989432657280802090}
   isReward: 0
+  anchorPos: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  isMoving: 0
+  isRotating: 0
 --- !u!1 &5397041832131600432
 GameObject:
   m_ObjectHideFlags: 0
