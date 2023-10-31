@@ -22,11 +22,21 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public Coroutine runningCorotuine;
 
+    bool _playerIsHoveringThisCard = false;
+
     public void RenderData()
     {
         cost.text = data.cost.ToString();
         cardName.text = data.cardName;
         description.text = data.description;
+    }
+
+    void Update()
+    {
+        if (_playerIsHoveringThisCard)
+        {
+            CardEvents.HoveringCard(this);
+        }
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -41,13 +51,16 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             targetPos = transform.localPosition + (Vector3.up * 100);
         }
-        
+
+        _playerIsHoveringThisCard = true;
         CardEvents.EnteredCard(this);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
         targetPos = anchorPos;
+
+        _playerIsHoveringThisCard = false;
         CardEvents.ExitedCard(this);
     }
 }
