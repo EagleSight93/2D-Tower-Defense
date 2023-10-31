@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
-
 
 [CustomPropertyDrawer(typeof(SoundClip))]
 public class SoundClipSerializedDrawer : PropertyDrawer
@@ -16,8 +16,14 @@ public class SoundClipSerializedDrawer : PropertyDrawer
 
         // Draw the x and y fields side by side
         EditorGUI.PrefixLabel(new Rect(position.x, position.y, halfWidth, position.height), label);
-        EditorGUI.PropertyField(new Rect(position.x + halfWidth + halfWidth * 0.25f, position.y, halfWidth * 0.75f, position.height), property.FindPropertyRelative("clip"), GUIContent.none);
-        EditorGUI.PropertyField(new Rect(position.x + halfWidth * 0.9f, position.y, halfWidth * 0.275f, position.height), property.FindPropertyRelative("volume"), GUIContent.none);
+        EditorGUI.PropertyField(new Rect(position.x + halfWidth + halfWidth * 0.5f, position.y, halfWidth * 0.5f, position.height), property.FindPropertyRelative("clip"), GUIContent.none);
+
+        // Create a slider for the "volume" field
+        float volumeValue = property.FindPropertyRelative("volume").floatValue;
+        Rect sliderPosition = new Rect(position.x + halfWidth * 0.75f, position.y, halfWidth / 1.35f, position.height);
+        volumeValue = EditorGUI.Slider(sliderPosition, volumeValue, 0.0f, 1.0f);
+
+        property.FindPropertyRelative("volume").floatValue = volumeValue;
 
         EditorGUI.EndProperty();
     }
