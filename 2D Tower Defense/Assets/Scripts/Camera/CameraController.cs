@@ -10,19 +10,15 @@ public class CameraController : MonoBehaviour
     [SerializeField] float horizontalPanArea;
     [SerializeField] float minZoom, maxZoom;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (!Application.isFocused) return;
 
+        MainCamera mainCam = MainCamera.Instance;
+        float orthographicSize = mainCam.Cam.orthographicSize;
+
         //Zoom
-        Camera.main.orthographicSize = Mathf.Clamp(-Input.mouseScrollDelta.y + Camera.main.orthographicSize, minZoom, maxZoom);
+        mainCam.Cam.orthographicSize = Mathf.Clamp(-Input.mouseScrollDelta.y + orthographicSize, minZoom, maxZoom);
         
         float mouseHeightInArea = 0;
         float mouseWidthInArea = 0;
@@ -57,7 +53,7 @@ public class CameraController : MonoBehaviour
             float maxPercentage = Mathf.Max(heightPercentage, widthPercentage);
 
             Vector3 mouseDir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f)).normalized;
-            transform.position += mouseDir * (maxPanSpeed * maxPercentage) * Time.deltaTime * Camera.main.orthographicSize;
+            transform.position += mouseDir * (maxPanSpeed * maxPercentage * Time.deltaTime * orthographicSize);
         }
     }
 }
