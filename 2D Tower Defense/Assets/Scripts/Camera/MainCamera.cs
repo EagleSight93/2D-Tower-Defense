@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Core.Logging;
 using UnityEngine;
 
 public class MainCamera : MonoBehaviour
@@ -59,11 +60,13 @@ public class MainCamera : MonoBehaviour
         }
     }
 
+    readonly CLogger _logger = new(true);
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Debug.LogError("Mutliple Main Camera's In Scene");
+            _logger.LogError("Mutliple Main Camera's In Scene");
             Destroy(this);
         }
         else

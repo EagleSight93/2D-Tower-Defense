@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Logging;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -34,6 +35,8 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable
 
     float _curAtkTime;
     float _curDetectionTime;
+
+    readonly CLogger _logger = new(true);
 
     void Awake()
     {
@@ -154,7 +157,7 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable
     {
         if (!shootPos)
         {
-            Debug.LogError($"Assign a shootPos to {gameObject.name}", gameObject);
+            _logger.LogError($"Assign a shootPos to {gameObject.name}", gameObject);
             return;
         }
 

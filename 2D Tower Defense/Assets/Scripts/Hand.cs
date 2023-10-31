@@ -2,6 +2,7 @@ using SpleenTween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Logging;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -23,6 +24,7 @@ public class Hand : MonoBehaviour
     public AnimationCurve movingCardCurve;
     public AnimationCurve rotatingCardCurve;
 
+    readonly CLogger _logger = new(true);
 
     void OnEnable()
     {
@@ -174,8 +176,7 @@ public class Hand : MonoBehaviour
 
         card.isMoving=false;
 
-        print("Coroutine END");
-        
+        _logger.Log("Coroutine END", LogColor.Black);
     }
 
 
