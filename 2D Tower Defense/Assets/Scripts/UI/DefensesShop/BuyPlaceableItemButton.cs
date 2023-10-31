@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using Core.Logging;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuyPlaceableItemButton : MonoBehaviour
+public class BuyPlaceableItemButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    static bool _beingHovered;
+    static bool _placingItem;
+
     GameObject _itemPrefab;
     GameObject _heldItem;
 
@@ -17,7 +21,7 @@ public class BuyPlaceableItemButton : MonoBehaviour
     [SerializeField] Button purchaseButton;
     IPlaceable _placeable;
 
-    CLogger _logger = new(true);
+    readonly CLogger _logger = new(true);
 
     void OnEnable()
     {
@@ -43,6 +47,8 @@ public class BuyPlaceableItemButton : MonoBehaviour
 
     public void CreatePlaceableObject()
     {
+        if (_placingItem) return;
+
         if (_heldItem != null)
         {
             Destroy(_heldItem);
@@ -56,20 +62,43 @@ public class BuyPlaceableItemButton : MonoBehaviour
             return;
         }
 
-        StartCoroutine(MoveToMouseWhileTrue(() => Input.GetMouseButtonDown(0)));
-    } 
+        MoveItemToMouse(IsValidPlacement);
+    }
 
-    IEnumerator MoveToMouseWhileTrue(Func<bool> stopIfConditionMet)
+    void MoveItemToMouse(Func<bool> placementCondition) => StartCoroutine(MoveItemToMouseRoutine(placementCondition));
+
+    IEnumerator MoveItemToMouseRoutine(Func<bool> placementCondition)
     {
+        _placingItem = true;
+
         _placeable.PickedUp();
+
         MainCamera cam = MainCamera.Instance;
-        while (stopIfConditionMet?.Invoke() == false)
+
+        while (placementCondition?.Invoke() == false)
         {
             _heldItem.transform.position = cam.MousePos;
             yield return null;
         }
 
         _heldItem = null;
+        _placingItem = false;
+
         _placeable.Place(cam.MousePos);
+    }
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+    {
+        _beingHovered = true;
+    }
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+    {
+        _beingHovered = false;
+    }
+
+    bool IsValidPlacement()
+    {
+        if (Input.GetMouseButtonDown(0) && !_beingHovered) return true;
+        return false;
     }
 }
