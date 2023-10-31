@@ -33,18 +33,22 @@ namespace SpleenTween.Extensions
             setAxis(newVal);
         }
 
-        public static void SetAxisPos(Axis axis, Transform target, float targetVal) => SetAxis(axis, target.position, targetVal,
+        public static void SetPosAxis(Axis axis, Transform target, float targetVal) => SetAxis(axis, target.position, targetVal,
             (val) => target.transform.position = val);
-        public static void SetAxisScale(Axis axis, Transform target, float targetVal) => SetAxis(axis, target.localScale, targetVal,
+        public static void SetLocalPosAxis(Axis axis, Transform target, float targetVal) => SetAxis(axis, target.localPosition, targetVal,
+            (val) => target.transform.localPosition = val);
+        public static void SetScaleAxis(Axis axis, Transform target, float targetVal) => SetAxis(axis, target.localScale, targetVal,
             (val) => target.transform.localScale = val);
-        public static void SetAxisRot(Axis axis, Transform target, float targetVal) => SetAxis(axis, target.eulerAngles, targetVal,
+        public static void SetRotAxis(Axis axis, Transform target, float targetVal) => SetAxis(axis, target.eulerAngles, targetVal,
             (val) => target.transform.eulerAngles = val);
 
-        public static void AddAxisPos(Axis axis, Transform target, float increment) => AddAxis(axis, increment,
+        public static void AddPosAxis(Axis axis, Transform target, float increment) => AddAxis(axis, increment,
             (val) => target.transform.position += val);
-        public static void AddAxisScale(Axis axis, Transform target, float increment) => AddAxis(axis, increment,
+        public static void AddLocalPosAxis(Axis axis, Transform target, float increment) => AddAxis(axis, increment,
+            (val) => target.transform.localPosition += val);
+        public static void AddScaleAxis(Axis axis, Transform target, float increment) => AddAxis(axis, increment,
             (val) => target.transform.localScale += val);
-        public static void AddAxisRot(Axis axis, Transform target, float increment) => AddAxis(axis, increment,
+        public static void AddRotAxis(Axis axis, Transform target, float increment) => AddAxis(axis, increment,
             (val) => target.transform.eulerAngles += val);
 
 
