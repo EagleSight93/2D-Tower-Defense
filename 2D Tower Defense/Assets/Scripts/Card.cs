@@ -20,7 +20,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public bool isMoving = false;
     public bool isRotating = false;
 
-    public Coroutine runningCorotuine;
+    public Coroutine currentMoveCoroutine;
 
     bool _playerIsHoveringThisCard = false;
 

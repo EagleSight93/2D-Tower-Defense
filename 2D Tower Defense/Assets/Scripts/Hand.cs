@@ -44,7 +44,7 @@ public class Hand : MonoBehaviour
         if (card.transform.localPosition != card.targetPos && !card.isMoving)
         {
             card.isMoving = true;
-            card.runningCorotuine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
+            card.currentMoveCoroutine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
         }
     }
     void MoveCardImmediate(Card card)
@@ -52,8 +52,8 @@ public class Hand : MonoBehaviour
         if (card.transform.localPosition != card.targetPos)
         {
             card.isMoving = true;
-            StopCoroutine(card.runningCorotuine);
-            card.runningCorotuine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
+            StopCoroutine(card.currentMoveCoroutine);
+            card.currentMoveCoroutine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
         }
     }
 
