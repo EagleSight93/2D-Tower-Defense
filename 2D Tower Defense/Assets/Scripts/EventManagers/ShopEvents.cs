@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ShopEvents : MonoBehaviour
+public static class ShopEvents
 {
     public static event Action<int> OnItemPurchased;
 

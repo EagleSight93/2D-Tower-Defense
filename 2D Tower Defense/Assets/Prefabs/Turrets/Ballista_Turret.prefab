@@ -59,8 +59,10 @@ MonoBehaviour:
   detectionType: 0
   visionRadius: 10
   detectionInterval: 0
-  detectTargets: 0
   shootPos: {fileID: 9053050743396401585}
+  shootSound:
+    clip: {fileID: 8300000, guid: 0bfdc6787c498624c9bad6c33402d5b0, type: 3}
+    volume: 0.1
 --- !u!58 &5640877327550785469
 CircleCollider2D:
   m_ObjectHideFlags: 0

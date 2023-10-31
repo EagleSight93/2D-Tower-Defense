@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8778788524498104766}
   - component: {fileID: 270822843695692390}
-  - component: {fileID: 4114945803471795051}
   - component: {fileID: 6786561817177361854}
   - component: {fileID: 430477503936908817}
   - component: {fileID: 8809547461952357814}
@@ -48,24 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286710fb31902fd4db6649d970e5cf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4114945803471795051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3937173869028394362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3871babc18215b468649bc62a77b33f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   maxPanSpeed: 1
   zoomSpeed: 10
   verticalPanArea: 50
   horizontalPanArea: 50
-  minZoom: 1
-  maxZoom: 250
+  minZoom: 2.5
+  maxZoom: 200
 --- !u!20 &6786561817177361854
 Camera:
   m_ObjectHideFlags: 0

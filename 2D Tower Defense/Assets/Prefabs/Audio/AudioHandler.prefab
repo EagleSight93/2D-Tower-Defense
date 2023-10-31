@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 3033482351356038969}
   musicSource: {fileID: 2019149259539391343}
+  spatialSourcePrefab: {fileID: 2534521679318062962, guid: efb3a5fbdcff5044a951ba615a42dbe4, type: 3}
   cardClicked:
     clip: {fileID: 8300000, guid: 0507b3e3a77571b438f88778b6b2d4dc, type: 3}
     volume: 0.5

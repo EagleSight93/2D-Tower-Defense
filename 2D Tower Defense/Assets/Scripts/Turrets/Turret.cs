@@ -31,6 +31,9 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable, IPlaceable
 
     [SerializeField] Transform shootPos;
 
+    [Header("Sounds")]
+    public SoundClip shootSound;
+
     ITurret _turret;
 
     float _curAtkTime;
@@ -75,6 +78,8 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable, IPlaceable
 
         var projectile = Instantiate(projectilePrefab, shootPos.position, targetRotation);
         projectile.Init(projectileSpeed, damage, projectileLifetime, (_) => print("Hit Enemy"));
+
+        CombatEvents.TurretShot(this);
 
         _curAtkTime = 0;
     }
