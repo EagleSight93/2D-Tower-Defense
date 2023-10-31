@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3783554761387347696}
   - component: {fileID: 8446802412247320646}
+  - component: {fileID: 2352890013601826632}
+  - component: {fileID: 4894265664135728054}
   - component: {fileID: 5640877327550785469}
   - component: {fileID: 5741195290864606009}
   m_Layer: 15
@@ -63,6 +65,34 @@ MonoBehaviour:
   shootSound:
     clip: {fileID: 8300000, guid: 0bfdc6787c498624c9bad6c33402d5b0, type: 3}
     volume: 0.1
+--- !u!114 &2352890013601826632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947130228352399292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52eb4227a10d9a4abe1821239dd426a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOwned: 1
+  health: {fileID: 4894265664135728054}
+--- !u!114 &4894265664135728054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947130228352399292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054f3711dfb393d479387b0e712c1148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!58 &5640877327550785469
 CircleCollider2D:
   m_ObjectHideFlags: 0

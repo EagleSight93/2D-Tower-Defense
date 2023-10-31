@@ -13,7 +13,7 @@ public class DefensesShopPanelController : MonoBehaviour
     GameObject _heldItem;
     IPlaceable _placeable;
 
-    bool _placingItem;
+    public bool placingItem;
 
     readonly CLogger _logger = new(true);
 
@@ -52,7 +52,7 @@ public class DefensesShopPanelController : MonoBehaviour
 
     IEnumerator MoveItemToMouseRoutine(Func<bool> placementCondition)
     {
-        _placingItem = true;
+        placingItem = true;
 
         _placeable.PickedUp();
 
@@ -65,7 +65,7 @@ public class DefensesShopPanelController : MonoBehaviour
         }
 
         _heldItem = null;
-        _placingItem = false;
+        placingItem = false;
 
         _placeable.Place(cam.MousePos);
     }

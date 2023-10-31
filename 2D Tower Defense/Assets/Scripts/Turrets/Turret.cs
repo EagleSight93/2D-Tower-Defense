@@ -6,6 +6,7 @@ using Core.Logging;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(CombatEntity))]
 public class Turret : MonoBehaviour, IDestructable, ITargetable, IPlaceable
 {
     public enum DetectionType
@@ -21,6 +22,7 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable, IPlaceable
     [SerializeField] float accurateAngle = 30f;
     [SerializeField] float projectileSpeed = 5f;
     [SerializeField] float projectileLifetime = 1f;
+    [SerializeField] int pierces = 1;
 
     [Header("Detection")]
     [SerializeField] LayerMask targetMask;
@@ -39,10 +41,13 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable, IPlaceable
     float _curAtkTime;
     float _curDetectionTime;
 
+    CombatEntity _combatEntity;
+
     readonly CLogger _logger = new(true);
 
     void Awake()
     {
+        _combatEntity = GetComponent<CombatEntity>();
         _turret = GetComponent<ITurret>();
     }
 
@@ -77,11 +82,17 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable, IPlaceable
         Quaternion targetRotation = Quaternion.Euler(0, 0, randAngle);
 
         var projectile = Instantiate(projectilePrefab, shootPos.position, targetRotation);
-        projectile.Init(projectileSpeed, damage, projectileLifetime, (_) => print("Hit Enemy"));
+        projectile.Init(projectileSpeed, damage, projectileLifetime, pierces, OnHitEntity, () => print("Projectile Destroyed"));
 
         CombatEvents.TurretShot(this);
 
         _curAtkTime = 0;
+    }
+
+    void OnHitEntity(CombatEntity target, Projectile projectile)
+    {
+        if (!CombatEntity.AreEnemies(_combatEntity, target)) return;
+        target.health.TakeDamage(damage);
     }
 
     void FaceTarget(ITargetable target)

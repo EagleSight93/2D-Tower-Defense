@@ -5,6 +5,7 @@ using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(CombatEntity))]
 public class Enemy : MonoBehaviour, IDestructable, ITargetable
 {
     NavMeshAgent _agent;
