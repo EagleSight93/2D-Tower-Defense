@@ -6,7 +6,7 @@ using Core.Logging;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Turret : MonoBehaviour, IDestructable, ITargetable
+public class Turret : MonoBehaviour, IDestructable, ITargetable, IPlaceable
 {
     public enum DetectionType
     {
@@ -27,7 +27,7 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable
     [SerializeField] DetectionType detectionType;
     [SerializeField] float visionRadius = 3f;
     [SerializeField] float detectionInterval = 0.5f;
-    [SerializeField] bool detectTargets;
+    bool _detectTargets;
 
     [SerializeField] Transform shootPos;
 
@@ -88,7 +88,7 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable
 
     ITargetable FindTarget()
     {
-        if (!detectTargets) return null;
+        if (!_detectTargets) return null;
 
         _curDetectionTime += Time.deltaTime;
         if (_curDetectionTime < detectionInterval) return null;
@@ -144,14 +144,25 @@ public class Turret : MonoBehaviour, IDestructable, ITargetable
         return furthestTarget;
     }
 
-    void EnableTargetDetection() => detectTargets = true;
-    void DisableTargetDetection() => detectTargets = false;
+    void EnableTargetDetection() => _detectTargets = true;
+    void DisableTargetDetection() => _detectTargets = false;
 
     void IDestructable.Damaged(float damageTaken) { }
     void IDestructable.Destroyed() => Destroy(gameObject);
 
     Vector3 ITargetable.GetPosition() => transform.position;
     bool ITargetable.IsTargetable() => true;
+
+    void IPlaceable.PickedUp()
+    {
+        _detectTargets = false;
+    }
+    void IPlaceable.Place(Vector3 position)
+    {
+        _detectTargets = true;
+        transform.position = position;
+    }
+
 
     void OnDrawGizmos()
     {

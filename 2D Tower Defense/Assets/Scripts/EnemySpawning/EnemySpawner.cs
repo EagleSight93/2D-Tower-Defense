@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Min(1)] [SerializeField] int startWave = 1;
-    [SerializeField] List<EnemyWave> waves;
+    [SerializeField] List<EnemyWaveSO> waves;
 
     void OnEnable()
     {
@@ -25,13 +25,13 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnWave(waves[waveIndex]));
     }
 
-    IEnumerator SpawnWave(EnemyWave wave)
+    IEnumerator SpawnWave(EnemyWaveSO waveSo)
     {
-        List<EnemyGroup> enemyGroups = wave.enemyGroups;
+        List<EnemyGroup> enemyGroups = waveSo.enemyGroups;
         int groupIndex = 0;
 
         float currentTime = 0f;
-        while (currentTime < wave.duration && groupIndex < enemyGroups.Count)
+        while (currentTime < waveSo.duration && groupIndex < enemyGroups.Count)
         {
             currentTime += Time.deltaTime;
             yield return null;
