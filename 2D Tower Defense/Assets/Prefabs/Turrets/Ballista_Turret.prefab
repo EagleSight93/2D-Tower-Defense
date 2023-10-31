@@ -55,6 +55,7 @@ MonoBehaviour:
   accurateAngle: 30
   projectileSpeed: 5
   projectileLifetime: 1
+  pierces: 3
   targetMask:
     serializedVersion: 2
     m_Bits: 3072
