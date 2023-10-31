@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
 
     [SerializeField] float maxPanSpeed;
+    [SerializeField] float zoomSpeed = 10f;
     [SerializeField] float verticalPanArea;
     [SerializeField] float horizontalPanArea;
     [SerializeField] float minZoom, maxZoom;
@@ -18,7 +19,7 @@ public class CameraController : MonoBehaviour
         float orthographicSize = mainCam.Cam.orthographicSize;
 
         //Zoom
-        mainCam.Cam.orthographicSize = Mathf.Clamp(-Input.mouseScrollDelta.y + orthographicSize, minZoom, maxZoom);
+        mainCam.Cam.orthographicSize = Mathf.Clamp((-Input.mouseScrollDelta.y * zoomSpeed) + orthographicSize, minZoom, maxZoom);
         
         float mouseHeightInArea = 0;
         float mouseWidthInArea = 0;

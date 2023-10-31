@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPanSpeed: 1
+  zoomSpeed: 10
   verticalPanArea: 50
   horizontalPanArea: 50
   minZoom: 1

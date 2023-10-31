@@ -8997,6 +8997,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 4114945803471795051, guid: 76f88d74accfc5e43a95206441b07a8f, type: 3}
+      propertyPath: zoomSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8778788524498104766, guid: 76f88d74accfc5e43a95206441b07a8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
