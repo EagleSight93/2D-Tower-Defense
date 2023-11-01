@@ -12,10 +12,12 @@ public class Hand : MonoBehaviour
     public Card selectedCard;
     public List<Card> cards;
 
-    public float cardheight;
-    public float cardwidth;
+    public float cardHeight;
+    public float cardWidth;
+
     public float rotationAngleMult;
-    public float padding;
+    public float cardPadding;
+    public float cardRaiseHeight;
 
     public float animationTimeMove;
     public float animationTimeRotate;
@@ -29,31 +31,32 @@ public class Hand : MonoBehaviour
     void OnEnable()
     {
         CardEvents.OnCardClicked += SelectCard;
-        CardEvents.OnCardEntered += MoveCard;
+        CardEvents.OnCardEntered += MoveCardImmediate;
         CardEvents.OnCardExited += MoveCardImmediate;
     }
     void OnDisable()
     {
         CardEvents.OnCardClicked -= SelectCard;
-        CardEvents.OnCardEntered -= MoveCard;
+        CardEvents.OnCardEntered -= MoveCardImmediate;
         CardEvents.OnCardExited -= MoveCardImmediate;
     }
+
 
     void MoveCard(Card card)
     {
         if (card.transform.localPosition != card.targetPos && !card.isMoving)
         {
-            card.isMoving = true;
-            card.currentMoveCoroutine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
+            card.currentMoveCoroutine = StartCoroutine(AnimateCardMove(card, animationTimeMove));
         }
     }
+
     void MoveCardImmediate(Card card)
     {
         if (card.transform.localPosition != card.targetPos)
         {
-            card.isMoving = true;
-            StopCoroutine(card.currentMoveCoroutine);
-            card.currentMoveCoroutine = StartCoroutine(AnimateCardMove(card, animationTimeRaise));
+            if (card.currentMoveCoroutine != null) StopCoroutine(card.currentMoveCoroutine);
+            card.isMoving = false;
+            card.currentMoveCoroutine = StartCoroutine(AnimateCardMove(card, animationTimeMove));
         }
     }
 
@@ -62,7 +65,7 @@ public class Hand : MonoBehaviour
     {
         foreach (Card card in cards)
         {
-            if (card.transform.localRotation != card.targetRotation && !card.isRotating)
+            if (card.transform.localRotation != card.targetRotation)
             {
                 card.isRotating = true;
                 StartCoroutine(AnimateCardRotate(card, animationTimeRotate));
@@ -70,6 +73,7 @@ public class Hand : MonoBehaviour
         }
     }
 
+    //Set card anchors
     void CalculatePositions()
     {
         if (cards.Count == 1)
@@ -79,62 +83,49 @@ public class Hand : MonoBehaviour
             return;
         }
 
-        int totalCards = cards.Count;
-        float cardHalf = totalCards * 0.5f;
+        // Start X value of hand 
+        float cursor = 0; 
 
-        float increment = -cardHalf * cardwidth; 
+        if (cards.Count % 2 != 0)
+        {
+            //if odd
+            float cardHalf = (cards.Count - 1) * 0.5f;
+            cursor = -cardHalf * (cardWidth + cardPadding);
+        }
+        else
+        {
+            //if even
+            float cardHalf = cards.Count * 0.5f;
+            cursor = (-cardHalf * (cardWidth + cardPadding)) + (cardWidth + cardPadding) * 0.5f;
+        }
 
+        //set target positions an rotations
         foreach (Card card in cards)
         {
-            float xVal = increment + cardwidth/2;
+            //Set Position
+            float xVal = cursor;
             float yVal = -Mathf.Abs(xVal)/7.5f; 
-            card.anchorPos = new Vector3 (xVal, yVal, 0);
+            card.anchorPos = new Vector3 (xVal, 0, 0);
             card.targetPos = card.anchorPos;
 
-            increment += cardwidth;
+            cursor += (cardWidth + cardPadding);
 
+            //Set Rotation
             float angle = -rotationAngleMult * card.targetPos.x /1000;
             card.targetRotation = Quaternion.Euler(0,0, angle);
-
         }
-
-        /*if (cards.Count % 2 != 0)
-        {
-
-        }
-        else
-        {
-
-        }
-
-
-
-
-        if (cards.Count > 1)
-        {
-
-
-
-
-            foreach (Card card in cards)
-            {
-
-            }
-        }
-        else
-        {
-
-        }*/
     }
 
 
     public void AddCard(Card newCard)
     {
         cards.Add(newCard);
+        //set height when entered and maybe rotation angle?
+        newCard.slideHeight = cardRaiseHeight;
         CalculatePositions();
         foreach (Card card in cards)
         {
-            MoveCard(card);
+            MoveCardImmediate(card);
         }  
         //RotateCards();
     }
@@ -162,26 +153,28 @@ public class Hand : MonoBehaviour
 
     IEnumerator AnimateCardMove(Card card, float animationTime)
     {
-        
+        card.isMoving = true;
         float time = 0;
         Vector3 startPos = card.transform.localPosition;
+        Vector3 target = card.targetPos;
 
         while (time <= animationTime)
         {
-            Vector3 lerpPos = Vector3.Lerp(startPos, card.targetPos, movingCardCurve.Evaluate(time/animationTime));
+            Vector3 lerpPos = Vector3.Lerp(startPos, target, movingCardCurve.Evaluate(time/animationTime));
             card.transform.localPosition = lerpPos;
             time += Time.deltaTime;
             yield return null;
         }
 
-        card.isMoving=false;
-
-        _logger.Log("Coroutine END", LogColor.Black);
+        card.isMoving = false;
+        //_logger.Log("Coroutine END", LogColor.Black);
     }
+
 
 
     IEnumerator AnimateCardRotate(Card card, float animationTime)
     {
+        
         float time = 0;
         Quaternion startRot = card.transform.localRotation;
 
@@ -193,6 +186,6 @@ public class Hand : MonoBehaviour
             yield return null;
         }
 
-        card.isRotating=false;
+        card.isRotating = false;
     }
 }

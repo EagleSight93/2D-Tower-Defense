@@ -12,7 +12,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] TMP_Text description;
 
     [HideInInspector] public bool isReward;
-    
+
+    public float slideHeight;
     public Vector3 anchorPos;
     public Vector3 targetPos;
     public Quaternion targetRotation;
@@ -47,20 +48,15 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        if (!isMoving)
-        {
-            targetPos = transform.localPosition + (Vector3.up * 100);
-        }
-
         _playerIsHoveringThisCard = true;
+        targetPos = anchorPos + (Vector3.up * slideHeight);
         CardEvents.EnteredCard(this);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
-        targetPos = anchorPos;
-
         _playerIsHoveringThisCard = false;
+        targetPos = anchorPos;
         CardEvents.ExitedCard(this);
     }
 }

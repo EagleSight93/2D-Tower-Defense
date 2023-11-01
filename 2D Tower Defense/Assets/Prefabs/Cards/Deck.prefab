@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6587923307863169998, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -539
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6587923307863169998, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
       propertyPath: m_LocalPosition.z
@@ -176,12 +176,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8441599243257768739, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
+      propertyPath: cardWidth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441599243257768739, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
       propertyPath: cardwidth
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8441599243257768739, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
+      propertyPath: cardRaiseHeight
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441599243257768739, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
       propertyPath: animationTimeMove
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8441599243257768739, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
       propertyPath: rotationAngleMult
@@ -239,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ef34f915c32fd48a28ba5ac871b453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2868220168548432831 stripped
-Transform:
+--- !u!224 &2868220168548432831 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 6587923307863169998, guid: d6a1624879090ec4d9d737fcc55b0093, type: 3}
   m_PrefabInstance: {fileID: 8980448497199472753}
   m_PrefabAsset: {fileID: 0}
