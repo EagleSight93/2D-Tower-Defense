@@ -24,14 +24,13 @@ public class Deck : MonoBehaviour
         Card newCard = Instantiate(cardPrefab, hand.transform, false);
         newCard.data = cardDatas[index];
         newCard.RenderData();
-
         hand.AddCard(newCard);
     }
 
     [ContextMenu("Draw hand")]
     public void DrawHand()
     {
-        for (int i = 0; i < handSize; i++)
+        for (int i = 0; i < hand.handSize; i++)
             DrawCard();
     }
 }
