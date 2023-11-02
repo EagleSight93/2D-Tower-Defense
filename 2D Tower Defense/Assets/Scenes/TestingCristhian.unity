@@ -190,7 +190,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: height
-      value: -50
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: handSize
@@ -199,6 +199,10 @@ PrefabInstance:
     - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: cardPadding
       value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
+      propertyPath: slideUpHeight
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: heightFromHand
@@ -210,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: maxRotationAngle
-      value: 20
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 686345509011852114, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: animationTimeMove
@@ -318,7 +322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2868220168548432831, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 3040846053539207906, guid: f99f916a0088c224eabbb8fc1657e6ac, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

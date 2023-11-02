@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+using UnityEngine.Rendering.Universal;
+using Unity.Burst.Intrinsics;
 
 public class Hand : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class Hand : MonoBehaviour
 
     public float maxRotationAngle;
     public float cardPadding;
-    public float cardRaiseHeight;
+    public float slideUpHeight;
     public float height;
 
     public float animationTimeMove;
@@ -49,8 +51,9 @@ public class Hand : MonoBehaviour
         CalculatePositions();
         foreach (Card card in cards)
         {
+            card.slideHeight = slideUpHeight;
             MoveCardImmediate(card);
-            RotateCard(card);
+            RotateCardImmediate(card);
         }
     }
 
@@ -76,7 +79,13 @@ public class Hand : MonoBehaviour
         {
             StartCoroutine(AnimateCardRotate(card, animationTimeRotate));
         }
+    }
 
+    void RotateCardImmediate(Card card)
+    {
+        if (card.currentRotateCoroutine != null) StopCoroutine(card.currentRotateCoroutine);
+        card.isRotating = false;
+        card.currentRotateCoroutine = StartCoroutine(AnimateCardRotate(card, animationTimeRotate));
     }
 
     //Set card anchors
@@ -112,13 +121,21 @@ public class Hand : MonoBehaviour
 
         }
 
-
-
-
         //set target positions an rotations
         foreach (Card card in cards)
         {
-            //Set Position
+            //Set Target Rotation
+            /*
+            card.transform.localRotation = Quaternion.identity;
+            float angle = ((float)(cards.IndexOf(card) - midCardIndex)/midCardIndex) * -maxRotationAngle;
+            card.targetRotation = Quaternion.Euler(0, 0, angle);
+            */
+            
+            float angle = ((float)(cards.IndexOf(card) - midCardIndex)/midCardIndex) * -maxRotationAngle;
+            card.targetRotation = Quaternion.Euler(0, 0, angle);
+            
+
+            //Set Target Position
             float xVal = cursorX;
             float yVal = height;
 
@@ -126,11 +143,6 @@ public class Hand : MonoBehaviour
             card.targetPos = card.anchorPos;
 
             cursorX += (cardWidth + cardPadding);
-
-
-            //Set Rotation
-            float angle = ((float)(cards.IndexOf(card) - midCardIndex)/midCardIndex) * -maxRotationAngle;
-            card.targetRotation = Quaternion.Euler(0,0, angle);
         }
     }
 
@@ -138,15 +150,13 @@ public class Hand : MonoBehaviour
     public void AddCard(Card newCard)
     {
         cards.Add(newCard);
-        //set height when entered and maybe rotation angle?
-        newCard.slideHeight = cardRaiseHeight;
+        newCard.slideHeight = slideUpHeight;
         CalculatePositions();
         foreach (Card card in cards)
         {
+            RotateCardImmediate(card);
             MoveCardImmediate(card);
-            RotateCard(card);
         }
-
     }
 
     public void RemoveCard(Card card)
@@ -207,4 +217,11 @@ public class Hand : MonoBehaviour
 
         card.isRotating = false;
     }
+
+    IEnumerator SlideUpCard(Card card)
+    {
+        yield return new WaitUntil(() => !card.isRotating);
+        
+    }
+
 }

@@ -22,6 +22,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public bool isRotating = false;
 
     public Coroutine currentMoveCoroutine;
+    public Coroutine currentRotateCoroutine;
 
     bool _playerIsHoveringThisCard = false;
 
@@ -49,7 +50,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
         _playerIsHoveringThisCard = true;
-        targetPos = anchorPos + (Vector3.up * slideHeight);
+        targetPos = anchorPos + (transform.up * slideHeight);
         CardEvents.EnteredCard(this);
     }
 
