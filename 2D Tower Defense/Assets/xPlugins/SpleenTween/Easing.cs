@@ -24,7 +24,7 @@ namespace SpleenTween
     /// </summary>
     public static class Easing
     {
-        public static float EaseVal(Ease easing, float lerpValue)
+        public static float EaseVal(float lerpValue, Ease easing)
         {
             return easing switch
             {

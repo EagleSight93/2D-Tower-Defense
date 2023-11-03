@@ -23,8 +23,8 @@ public class Hand : MonoBehaviour
     public float animationTimeRotate;
     public float animationTimeRaise;
 
-    public AnimationCurve movingCardCurve;
-    public AnimationCurve rotatingCardCurve;
+    [SerializeField] Ease movingCardEase = Ease.OutSine;
+    [SerializeField] Ease rotatingCardEase = Ease.OutSine;
 
     readonly CLogger _logger = new(true);
 
@@ -188,7 +188,8 @@ public class Hand : MonoBehaviour
 
         while (time <= animationTime)
         {
-            Vector3 lerpPos = Vector3.Lerp(startPos, target, movingCardCurve.Evaluate(time/animationTime));
+            float lerpVal = Easing.EaseVal(time / animationTime, movingCardEase);
+            Vector3 lerpPos = Vector3.Lerp(startPos, target, lerpVal);
             card.transform.localPosition = lerpPos;
             time += Time.deltaTime;
             yield return null;
@@ -208,7 +209,8 @@ public class Hand : MonoBehaviour
 
         while (time <= animationTime)
         {
-            Vector3 lerpRot = Vector3.Lerp(startRot.eulerAngles, card.targetRotation.eulerAngles, rotatingCardCurve.Evaluate(time/animationTime));
+            float lerpVal = Easing.EaseVal(time / animationTime, rotatingCardEase);
+            Vector3 lerpRot = Vector3.Lerp(startRot.eulerAngles, card.targetRotation.eulerAngles, lerpVal);
             card.transform.localRotation = Quaternion.Euler(lerpRot.x, lerpRot.y, lerpRot.z);
             time += Time.deltaTime;
             yield return null;

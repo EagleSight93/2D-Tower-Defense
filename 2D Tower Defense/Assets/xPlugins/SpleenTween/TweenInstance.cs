@@ -41,14 +41,14 @@ namespace SpleenTween
         {
             get
             {
-                float easeVal = Easing.EaseVal(EaseType, LerpProgress);
+                float easeVal = Easing.EaseVal(LerpProgress, EaseType);
 
                 switch (LoopType)
                 {
                     case Loop.Rewind:
                         float backwardsLerp = 1 - LerpProgress;
                         float lerpBasedOnDirection = Direction == 0 ? backwardsLerp : LerpProgress;
-                        return Easing.EaseVal(EaseType, lerpBasedOnDirection);
+                        return Easing.EaseVal(lerpBasedOnDirection, EaseType);
                     case Loop.Yoyo:
                         float backwardsEase = 1 - easeVal;
                         return Direction == 0 ? backwardsEase : easeVal;
