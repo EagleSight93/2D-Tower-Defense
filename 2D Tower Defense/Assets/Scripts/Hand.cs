@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.Logging;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Hand : MonoBehaviour
 {
@@ -89,59 +90,40 @@ public class Hand : MonoBehaviour
     void CalculatePositions()
     {
         int cardCount = cards.Count;
-        int midCardIndex = 0;
 
         if (cardCount == 1)
         {
             cards[0].anchorPos = Vector3.zero;
             cards[0].targetRotation = Quaternion.identity;
-            midCardIndex = 1;
             return;
         }
+        float totalCardHalf = cardCount * 0.5f;
 
-        // Start X value of hand 
-        float cursorX = 0; 
+        float handExtents = cardCount * (cardWidth + cardPadding) / 2;
+        
 
-        if (cardCount % 2 != 0)
-        {
-            //if odd
-            float cardHalf = (cardCount - 1) * 0.5f;
-            midCardIndex = (int)cardHalf;//Need to solve this one
-            cursorX = -cardHalf * (cardWidth + cardPadding);
-        }
-        else
-        {
-            //if even
-            float cardHalf = cardCount* 0.5f;
-            midCardIndex = (int)cardHalf;
-            cursorX = (-cardHalf * (cardWidth + cardPadding)) + (cardWidth + cardPadding) * 0.5f;
-
-        }
 
         //set target positions an rotations
-        foreach (Card card in cards)
+        for (int i = 0; i < cards.Count; i++)
         {
-            //Set Target Rotation
-            /*
-            card.transform.localRotation = Quaternion.identity;
-            float angle = ((float)(cards.IndexOf(card) - midCardIndex)/midCardIndex) * -maxRotationAngle;
-            card.targetRotation = Quaternion.Euler(0, 0, angle);
-            */
-
+            Card card = cards[i];
             if (card == null) continue;
-            
-            float angle = ((float)(cards.IndexOf(card) - midCardIndex)/midCardIndex) * -maxRotationAngle;
-            card.targetRotation = Quaternion.Euler(0, 0, angle);
-            
 
-            //Set Target Position
-            float xVal = cursorX;
-            float yVal = height;
 
-            card.anchorPos = new Vector3(xVal, yVal, 0);
+            if (cards.Count == handSize)
+            {
+                print("JH");
+            }   
+
+            float lerpVal = (i - totalCardHalf) / (cardCount - totalCardHalf);
+            float sign = Mathf.Sign(i - totalCardHalf);
+            float targetAngle = -sign * maxRotationAngle;
+
+            card.targetRotation = Quaternion.Slerp(card.transform.localRotation, Quaternion.Euler(0, 0, targetAngle), Mathf.Abs(lerpVal));
+
+            float targetPos = sign * handExtents;
+            card.anchorPos = Vector3.Slerp(card.transform.localPosition, new Vector3(targetPos, -height, 0), Mathf.Abs(lerpVal));
             card.targetPos = card.anchorPos;
-
-            cursorX += (cardWidth + cardPadding);
         }
     }
 
@@ -195,6 +177,8 @@ public class Hand : MonoBehaviour
             yield return null;
         }
 
+        card.transform.localPosition = target;
+
         card.isMoving = false;
         //_logger.Log("Coroutine END", LogColor.Black);
     }
@@ -210,12 +194,13 @@ public class Hand : MonoBehaviour
         while (time <= animationTime)
         {
             float lerpVal = Easing.EaseVal(time / animationTime, rotatingCardEase);
-            Vector3 lerpRot = Vector3.Lerp(startRot.eulerAngles, card.targetRotation.eulerAngles, lerpVal);
-            card.transform.localRotation = Quaternion.Euler(lerpRot.x, lerpRot.y, lerpRot.z);
+      
+            card.transform.localRotation = Quaternion.Slerp(card.transform.localRotation, card.targetRotation, lerpVal);
             time += Time.deltaTime;
             yield return null;
         }
 
+        card.transform.localRotation = card.targetRotation;
         card.isRotating = false;
     }
 
