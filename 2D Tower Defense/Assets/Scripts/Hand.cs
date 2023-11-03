@@ -3,12 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Logging;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEditor;
-using UnityEngine.Rendering.Universal;
-using Unity.Burst.Intrinsics;
 
 public class Hand : MonoBehaviour
 {
@@ -46,11 +41,13 @@ public class Hand : MonoBehaviour
         CardEvents.OnCardExited -= MoveCardImmediate;
     }
 
-    private void OnValidate()
+    void OnValidate()
     {
         CalculatePositions();
         foreach (Card card in cards)
         {
+            if (card == null) continue;
+
             card.slideHeight = slideUpHeight;
             MoveCardImmediate(card);
             RotateCardImmediate(card);
@@ -130,6 +127,8 @@ public class Hand : MonoBehaviour
             float angle = ((float)(cards.IndexOf(card) - midCardIndex)/midCardIndex) * -maxRotationAngle;
             card.targetRotation = Quaternion.Euler(0, 0, angle);
             */
+
+            if (card == null) continue;
             
             float angle = ((float)(cards.IndexOf(card) - midCardIndex)/midCardIndex) * -maxRotationAngle;
             card.targetRotation = Quaternion.Euler(0, 0, angle);

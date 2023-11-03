@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb93b7398e8241d458a2ac9b66b46d2b, type: 2}
   - {fileID: 11400000, guid: eb93b7398e8241d458a2ac9b66b46d2b, type: 2}
   - {fileID: 11400000, guid: eb93b7398e8241d458a2ac9b66b46d2b, type: 2}
+  placingItem: 0
 --- !u!223 &4850162789564750559
 Canvas:
   m_ObjectHideFlags: 0
